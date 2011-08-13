@@ -11,8 +11,7 @@ $lista = $tasks->findAll();
 
 <?php
 
-foreach ($lista as $task)
-{
+foreach ($lista as $task) {
 ?>
    <tr>
         <td><?php echo $task->task ?> </td>

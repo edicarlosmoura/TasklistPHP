@@ -1,0 +1,51 @@
+<html>
+<head>
+    <title>Tarefa Task</title>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.0/jquery.min.js">
+    </script>
+    <script type="text/javascript">
+        $(function() {
+            //listando as tasklist atraves do arquivo listaTask.php
+            $("#tasklist").load('listaTask.php');
+            
+            //inserindo tasklist atraves do arquivo insereTask.php
+            $("#botao").click(function() {
+                var dados = $("#dados").val();
+                $.ajax({
+                        type:'POST',
+                        url:'insereTask.php',
+                        data:'dados=' + dados,
+                        complete:function(data){
+                            
+                            // //listando as tasklist atraves do arquivo listaTask.php apos inserir
+                            $("#tasklist").load('listaTask.php');
+                        }
+                });
+            });
+            
+            //deletando tasklist atraves da chamada do arquivo deletaTask.php
+            $(".deletar").live('click', function() {
+                var id = $(this).attr('id');
+                $.ajax({
+                        type:'POST',
+                        url:'deletaTask.php',
+                        data:'id=' + id,
+                        complete:function(data){
+                            //listando as tasklist atraves do arquivo listaTask.php apos deletar
+                            $("#tasklist").load('listaTask.php');
+                        }
+                });
+            });
+         });
+        
+    </script>
+</head>
+<body>
+    <h1> TASKLIST</h1>
+    <div id="tasklist"></div>
+    <input type="text" id="dados" />
+    <input type="button" value="Testar" id="botao">
+
+    
+</body>
+<html>
